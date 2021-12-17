@@ -19,7 +19,7 @@
 // @require             https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
 // @require             https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js
 //
-// @version             1.21
+// @version             1.22.1-beta
 //
 // @license             GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
@@ -1743,7 +1743,7 @@
   const EMPIRE_STORAGE_PREFIX = [
     '', GM_info.script.namespace, GM_info.script.name, unsafeWindow.dataSetForView.avatarId, ''].join('***');
   var empire = {
-    version: 1.21,
+    version: '1.22.1-beta',
     scriptId: 766,
     scriptName: 'Empire Overview',
     logger: null,
@@ -2383,7 +2383,11 @@
               elem += (building.city().getResource(key).getCurrent < resourceCost[key] ? '<td class="red left">(' + Utils.FormatNumToStr(building.city().getResource(key).getCurrent - resourceCost[key], true, 0) + ')</td></tr>' : '<td><img src="skin/interface/check_mark_17px.png" style="height:11px; float:left;"></td></tr>');
             }
           }
-          elem = (elem !== '') ? '<table><thead><tr><th colspan="3" align="center"><b>' + (uConst ? Constant.LanguageData[lang].next_Level + ' ' + needlevel : Constant.LanguageData[lang].next_Level + ' ' + costlevel) + '</b></th></tr></thead><tbody>' + elem + '</tbody><tfoot>' + time + '</tfoot></table>' : '<table><thead><tr><th colspan="3" align="center">' + Constant.LanguageData[lang].max_Level + '</th></tr></thead></table>';
+          elem = (elem !== '') ? '<table><thead><tr><th colspan="3" align="center"><b>'
+            + (uConst
+              ? (lang != 'zh_HK' ? (Constant.LanguageData[lang].next_Level + ' ' + needlevel) : (needlevel + ' ' + Constant.LanguageData[lang].next_Level))
+              : (lang != 'zh_HK' ? (Constant.LanguageData[lang].next_Level + ' ' + costlevel) : (costlevel + ' ' + Constant.LanguageData[lang].next_Level)))
+            + '</b></th></tr></thead><tbody>' + elem + '</tbody><tfoot>' + time + '</tfoot></table>' : '<table><thead><tr><th colspan="3" align="center">' + Constant.LanguageData[lang].max_Level + '</th></tr></thead></table>';
           if (uConst) {
             elem = '<table><thead><tr><th colspan="3" align="center"><b>' + Constant.LanguageData[lang].constructing + '</b></th></tr></thead>' + '<tbody><tr><td></td><td>' + Utils.FormatFullTimeToDateString(building.getCompletionTime, true) + '</td></tr>' + '<tr><td><img src="skin/resources/icon_time.png" style="height: 11px; float: left;"></td><td><i>(' + Utils.FormatTimeLengthToStr(building.getCompletionTime - $.now(), 3, ' ') + ')</i></td></tr></tbody></table>' + elem;
           }
@@ -2600,7 +2604,24 @@
         + ' <span><select id="empire_wineWarningTime"><option value="0"' + (database.settings.wineWarningTime.value === 0 ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].off + '</option><option value="12"' + (database.settings.wineWarningTime.value == 12 ? 'selected=selected' : '') + '> 12' + Constant.LanguageData[lang].hour + '</option><option value="24"' + (database.settings.wineWarningTime.value == 24 ? 'selected=selected' : '') + '> 24' + Constant.LanguageData[lang].hour + '</option><option value="36"' + (database.settings.wineWarningTime.value == 36 ? 'selected=selected' : '') + '> 36' + Constant.LanguageData[lang].hour + '</option><option value="48"' + (database.settings.wineWarningTime.value == 48 ? 'selected=selected' : '') + '> 48' + Constant.LanguageData[lang].hour + '</option><option value="96"' + (database.settings.wineWarningTime.value == 96 ? 'selected=selected' : '') + '> 96' + Constant.LanguageData[lang].hour + '</option></select><nobr data-tooltip="' + Constant.LanguageData[lang].wineWarningTime_description + '"> ' + Constant.LanguageData[lang].wineWarningTime + '</nobr></span>'
         + ' <hr>'
         + ' <span class="categories">' + Constant.LanguageData[lang].language_category + '</span>'
-        + ' <span><select id="empire_languageChange"><option value="en"' + (database.settings.languageChange.value == 'en' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].en + '</option><option value="de"' + (database.settings.languageChange.value == 'de' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].de + '</option><option value="it"' + (database.settings.languageChange.value == 'it' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].it + '</option><option value="el"' + (database.settings.languageChange.value == 'el' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].el + '</option><option value="es"' + (database.settings.languageChange.value == 'es' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].es + '</option><option value="fr"' + (database.settings.languageChange.value == 'fr' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].fr + '</option><option value="pt"' + (database.settings.languageChange.value == 'pt' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].pt + '</option><option value="nl"' + (database.settings.languageChange.value == 'nl' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].nl + '</option><option value="ro"' + (database.settings.languageChange.value == 'ro' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ro + '</option><option value="ru"' + (database.settings.languageChange.value == 'ru' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ru + '</option><option value="cz"' + (database.settings.languageChange.value == 'cz' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].cz + '</option><option value="pl"' + (database.settings.languageChange.value == 'pl' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].pl + '</option><option value="tr"' + (database.settings.languageChange.value == 'tr' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].tr + '</option><option value="ar"' + (database.settings.languageChange.value == 'ar' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ar + '</option><option value="ir"' + (database.settings.languageChange.value == 'ir' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ir + '</option></select><nobr data-tooltip="' + Constant.LanguageData[lang].languageChange_description + '"> ' + Constant.LanguageData[lang].languageChange + '</nobr></span>'
+        + ' <span><select id="empire_languageChange">'
+        + '<option value="en"' + (database.settings.languageChange.value == 'en' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].en + '</option>'
+        + '<option value="de"' + (database.settings.languageChange.value == 'de' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].de + '</option>'
+        + '<option value="it"' + (database.settings.languageChange.value == 'it' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].it + '</option>'
+        + '<option value="el"' + (database.settings.languageChange.value == 'el' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].el + '</option>'
+        + '<option value="es"' + (database.settings.languageChange.value == 'es' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].es + '</option>'
+        + '<option value="fr"' + (database.settings.languageChange.value == 'fr' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].fr + '</option>'
+        + '<option value="pt"' + (database.settings.languageChange.value == 'pt' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].pt + '</option>'
+        + '<option value="nl"' + (database.settings.languageChange.value == 'nl' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].nl + '</option>'
+        + '<option value="ro"' + (database.settings.languageChange.value == 'ro' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ro + '</option>'
+        + '<option value="ru"' + (database.settings.languageChange.value == 'ru' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ru + '</option>'
+        + '<option value="cz"' + (database.settings.languageChange.value == 'cz' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].cz + '</option>'
+        + '<option value="pl"' + (database.settings.languageChange.value == 'pl' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].pl + '</option>'
+        + '<option value="tr"' + (database.settings.languageChange.value == 'tr' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].tr + '</option>'
+        + '<option value="ar"' + (database.settings.languageChange.value == 'ar' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ar + '</option>'
+        + '<option value="ir"' + (database.settings.languageChange.value == 'ir' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].ir + '</option>'
+        + '<option value="zh_HK"' + (database.settings.languageChange.value == 'zh_HK' ? 'selected=selected' : '') + '> ' + Constant.LanguageData[lang].zh_HK + '</option>'
+        + '</select><nobr data-tooltip="' + Constant.LanguageData[lang].languageChange_description + '"> ' + Constant.LanguageData[lang].languageChange + '</nobr></span>'
         + '</div>';
       var features = '<div class="options">'
         + ' <span class="categories">' + Constant.LanguageData[lang].visibility_category + '</span>'
@@ -5023,7 +5044,7 @@
       dailyBonus: { type: 'boolean', default: false, categories: 'resource_category' },
       wineWarning: { type: 'boolean', default: false, categories: 'resource_category' },
       wineWarningTime: { type: 'number', default: 0, choices: [0, 12, 24, 36, 48, 96], categories: 'resource_category' },
-      languageChange: { type: 'language', default: ikariam.Language(), selection: ['en', 'de', 'it', 'el', 'es', 'fr', 'ro', 'ru', 'cz', 'pl', 'ar', 'ir', 'pt', 'tr', 'nl'], categories: 'language_category' },
+      languageChange: { type: 'language', default: ikariam.Language(), selection: ['en', 'de', 'it', 'el', 'es', 'fr', 'ro', 'ru', 'cz', 'pl', 'ar', 'ir', 'pt', 'tr', 'nl', 'zh_HK'], categories: 'language_category' },
     },
     SettingCategories: {
       VISIBILITY: 'visibility_category',
@@ -5235,6 +5256,7 @@
         pt: 'Portuguese',
         tr: 'Turkish',
         nl: 'Dutch',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -5522,6 +5544,7 @@
         pt: 'Portugiesisch',
         tr: 'Türkisch',
         nl: 'Niederländisch',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplit',
         steamgiant: 'Dampfgigant',
@@ -5801,6 +5824,7 @@
         pt: 'Portoghese',
         tr: 'Turco',
         nl: 'Olandese',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Oplita',
         steamgiant: 'Gigante a Vapore',
@@ -6081,6 +6105,7 @@
         pt: 'Πορτογαλικά',
         tr: 'Τούρκικα',
         nl: 'Ολλανδικά',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Οπλίτης',
         steamgiant: 'Ατμογίγαντας',
@@ -6360,6 +6385,7 @@
         pt: 'Portugués',
         tr: 'Turco',
         nl: 'Holandés',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplita',
         steamgiant: 'Gigante a vapor',
@@ -6640,6 +6666,7 @@
         pt: 'Portugais',
         tr: 'Turc',
         nl: 'Néerlandais',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -6920,6 +6947,7 @@
         pt: 'Portugheză',
         tr: 'Turcă',
         nl: 'Olandez',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -7200,6 +7228,7 @@
         pt: 'Португальский',
         tr: 'Tурецкий',
         nl: 'Голландский',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -7480,6 +7509,7 @@
         pt: 'Portugalsky',
         tr: 'Turecky',
         nl: 'Holandsky',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -7760,6 +7790,7 @@
         pt: 'Portugalski',
         tr: 'Turecki',
         nl: 'Holenderski',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -8040,6 +8071,7 @@
         pt: 'البرتغالية',
         tr: 'التركية',
         nl: 'هولندي',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -8320,6 +8352,7 @@
         pt: 'پرتغالی',
         tr: 'تركى',
         nl: 'هلندی',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -8600,6 +8633,7 @@
         pt: 'Português',
         tr: 'Turco',
         nl: 'Holandês',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -8880,6 +8914,7 @@
         pt: 'Portuguese',
         tr: 'Türkçe',
         nl: 'Hollandalı',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -9160,6 +9195,7 @@
         pt: 'Portugees',
         tr: 'Turks',
         nl: 'Nederlands',
+        zh_HK: 'Traditional Chinese (HK)',
         // Units
         phalanx: 'Hoplite',
         steamgiant: 'Steam Giant',
@@ -9248,7 +9284,296 @@
         thousandSeperator: ',',
         decimalPoint: '.',
         click_: '<b>Klik</b>'
-      }
+      },
+      zh_HK: {
+        buildings: '建築概覽',
+        economy: '經濟概覽',
+        military: '軍事概覽',
+        towns: '城鎮',
+        townHall: '市政廳',
+        palace: '皇宮',
+        palaceColony: '總督府',
+        tavern: '酒館',
+        museum: '博物館',
+        academy: '學院',
+        workshop: '兵工廠',
+        temple: '祭祀神殿',
+        embassy: '大使館  ',
+        warehouse: '倉庫',
+        dump: '貨棧',
+        port: '港口',
+        branchOffice: '市場',
+        wall: '城牆',
+        safehouse: '間諜小屋',
+        barracks: '軍營',
+        shipyard: '船塢',
+        forester: '林務官宅',
+        carpentering: '木匠工房',
+        winegrower: '葡萄酒釀造廠',
+        vineyard: '藏酒窖',
+        stonemason: '石匠小屋',
+        architect: '建築公署',
+        glassblowing: '玻璃吹製廠',
+        optician: '光學儀器商館',
+        alchemist: '煉金術士之塔',
+        fireworker: '煙火實驗場',
+        pirateFortress: '海賊堡壘',
+        blackMarket: '黑市',
+        marineChartArchive: '海圖檔案館',
+        tavern_level: 'Tavern Level',
+        corruption: '腐敗',
+        cultural: '文物協定',
+        population: '人口',
+        citizens: '市民',
+        scientists: '科學家',
+        scientists_max: '最大科學家數量',
+        options: '選項',
+        help: '說明',
+        agora: '露天哈拉廣場',
+        to_world: '轉至世界地圖',
+        to_island: '轉至島嶼地圖',
+        army_cost: '軍隊費用(基礎)',
+        fleet_cost: '艦隊費用(基礎)',
+        army_supply: '軍隊費用(補給)',
+        fleet_supply: '艦隊費用(補給)',
+        research_cost: '科學家',
+        income: '收入', 
+        expenses: '支出',
+        balances: '總計',
+        espionage: '查看間諜',
+        contracts: '查看協定',
+        combat: '查看軍隊動向',
+        satisfaction: '市民滿意度',
+        total_: '總計',
+        max_Level: 'max. Level',
+        actionP: '行動點',
+        researchP: '研究點',
+        finances_: '收支',
+        free_ground: '建築空地',
+        wood_: '木材',
+        wine_: '葡萄酒',
+        marble_: '大理石',
+        crystal_: '水晶',
+        sulphur_: '硫磺',
+        angry: '憤怒',
+        unhappy: '悲傷',
+        neutral: '一般',
+        happy: '高興',
+        euphoric: '愉快',
+        housing_space: '居民房屋上限',
+        free_Citizens: '市民(非工人)',
+        free_housing_space: '剩餘房屋空間',
+        level_tavern: '酒館等級',
+        maximum: '上限',
+        used: '已使用',
+        missing: '剩餘空間',
+        plundergold: '金幣',
+        garrision: '駐軍上限',
+        Sea: '海軍駐軍上限',
+        Inland: '陸軍駐軍上限',
+        full: '0',
+        off: 'off',
+        time_to_full: '滿溢',
+        time_to_empty: '清空',
+        capacity: '倉儲容量',
+        safe: '安全容量',
+        training: 'Training',
+        plundering: 'Plundering',
+        constructing: '正在升級中',
+        next_Level: '級時需要',
+        transport: '艦隊及部隊動態',
+        loading: '裝載中',
+        en_route: '行進中',
+        arrived: '已抵達',
+        arrival: '抵達',
+        to_town_hall: '轉至市政廳',
+        to_saw_mill: '轉至伐木場',
+        to_mine: '轉至資源礦',
+        to_barracks: '轉至軍營',
+        to_shipyard: '轉至船塢',
+        member: '查看聯盟成員名單',
+        transporting: '運輸物資至',
+        transporting_units: '部署部隊至',
+        transporting_fleets: '部署艦隊至',
+        today: '今日',
+        tomorrow: 'tomorrow',
+        yesterday: 'yesterday',
+        second: '秒',
+        minute: '分',
+        hour: '時',
+        day: '日',
+        week: '周',
+        month: '月',
+        year: '年',
+        hour_long: 'Hour',
+        day_long: 'Day',
+        week_long: 'Week',
+        ika_world: 'Search on Ikariam-World',
+        charts: 'Show Charts',
+        wonder1: '赫菲斯拓斯熔爐',
+        wonder2: '哈迪斯神聖石榴園',
+        wonder3: '德墨忒爾花園',
+        wonder4: '雅典娜神殿',
+        wonder5: '愛瑪仕神殿',
+        wonder6: '阿瑞斯戰神要塞',
+        wonder7: '波賽頓神殿',
+        wonder8: '尼祿巨像',
+        //settings
+        cityOrder: 'cityOrder',
+        fullArmyTable: '顥示所有軍隊',
+        hideOnWorldView: '進入世界地圖時自動隱藏',
+        hideOnIslandView: '進入島嶼地圖時自動隱藏',
+        hideOnCityView: '進入城鎮時自動隱藏',
+        onTop: 'Show on top of Ikariam windows',
+        windowTennis: 'Show above ikariam on mouseover',
+        autoUpdates: 'Automaticly check for updates',
+        smallFont: '使用較小字體',
+        goldShort: 'Reduce total gold display',
+        alternativeBuildingList: 'Use alternative building list',
+        compressedBuildingList: 'Use compressed building list',
+        wineOut: 'Disable Ambrosia feature "Out of Wine"',
+        dailyBonus: '自動確認每日獎勵',
+        unnecessaryTexts: 'Removes unnecessary descriptions',
+        ambrosiaPay: 'Deactivate new Ambrosia buying options',
+        wineWarning: 'Hide tooltip "wine warning"',
+        wineWarningTime: 'Wine remaining warning',
+        languageChange: '改變插件語言',
+        current_Version: '版本<b>:</b>',
+        ikariam_Version: 'Ikariam 版本<b>:</b>',
+        reset: '回復原始設定',
+        goto_website: 'Goto the scripts greasyfork.org website',
+        website: 'Website',
+        Check_for_updates: 'Force a check for updates',
+        check: 'Check for updates',
+        Report_bug: 'Report a bug in the script',
+        report: 'Report Bug',
+        save: '保存',
+        save_settings: '保存設定<b>!</b>&nbsp;',
+        newsticker: 'Hide news ticker',
+        event: 'Hide events',
+        logInPopup: '隱藏登入後資訊視窗',
+        birdswarm: '隱藏鳥群動畫',
+        walkers: '隱藏市民動畫',
+        noPiracy: '隱藏海賊',
+        hourlyRes: '隱藏資源每小時產量',
+        onIkaLogs: 'Use IkaLog Battle Report Converter',
+        playerInfo: 'Show information about player',
+        control: 'Hide Control center',
+        alert: 'Please choose only one option!',
+        alert_palace: 'Please visit your capital city first',
+        alert_palace1: 'There is still no palace present in your city.\n Please explore expansion and build a palace.',
+        alert_toast: 'Data Reset, reloading the page in a few seconds',
+        alert_error: 'An error occurred while checking for updates: ',
+        alert_noUpdate: 'No update is available for "',
+        alert_update: 'There is an update available for the Greasemonkey script "',
+        alert_update1: 'Would you like to go to the install page now?',
+        alert_daily: '請先啟動\'自動確認每日獎勵\'',
+        alert_wine: 'Warning wine > ',
+        en: 'English',
+        de: 'German',
+        it: 'Italian',
+        el: 'Greek',
+        es: 'Spanish',
+        fr: 'French',
+        ro: 'Romanian',
+        ru: 'Russian',
+        cz: 'Czech',
+        pl: 'Polish',
+        ar: 'Arabic',
+        ir: 'Persian',
+        pt: 'Portuguese',
+        tr: 'Turkish',
+        nl: 'Dutch',
+        zh_HK: '正體中文(香港)',
+        // Units
+        phalanx: '重裝步兵',
+        steamgiant: '蒸汽巨人',
+        spearman: '長矛兵',
+        swordsman: '劍士',
+        slinger: '投石兵',
+        archer: '弓箭手',
+        marksman: '火槍手',
+        ram: '攻城錘',
+        catapult: '投石車',
+        mortar: '迫擊炮',
+        gyrocopter: '旋翼機',
+        bombardier: '轟炸氣球',
+        cook: '廚師',
+        medic: '醫生',
+        spartan: '斯巴達戰士',
+        ship_ram: '衝撞船',
+        ship_flamethrower: '噴火船',
+        ship_steamboat: '蒸汽衝撞船',
+        ship_ballista: '強弩船',
+        ship_catapult: '投石船',
+        ship_mortar: '迫擊炮船',
+        ship_submarine: '潛艦',
+        ship_paddlespeedship: '輪槳快艇',
+        ship_ballooncarrier: '航空母艦',
+        ship_tender: '修護艦',
+        ship_rocketship: '弩炮船',
+        //settings descriptions
+        cityOrder_description: 'cityOrder_description',
+        fullArmyTable_description: '於軍事概覽頁面顯示所有可能的部隊(不管是否擁有)',
+        hideOnWorldView_description: '進入世界地圖時默認隱藏',
+        hideOnIslandView_description: '進入島嶼地圖時默認隱藏',
+        hideOnCityView_description: '進入城鎮時默認隱藏',
+        onTop_description: 'Show board on top of Ikariam windows',
+        windowTennis_description: 'Bring board to the top on mouseover<br>Send behind ikariam windows on mouseout<br>Ignores \'on top\' option',
+        autoUpdates_description: 'Enable automatic update checking<br>(Once every 24hrs)',
+        smallFont_description: '縮小插件所使用字體',
+        goldShort_description: 'Total gold display shorten on the Board',
+        alternativeBuildingList_description: 'Use alternative building table',
+        compressedBuildingList_description: 'Use condensed building table<br>Groups luxury resource production buildings<br>Groups palace/govenors residence',
+        wineOut_description: 'Disables the Ambrosia option to buy \'Out of Wine\'',
+        dailyBonus_description: '自動接收每日獎勵並關閉視窗',
+        unnecessaryTexts_description: 'Removes unnecessary descriptions in buildings,<br>the building list of buildings, minimize scrolling',
+        ambrosiaPay_description: 'Disables the new Ambrosia buying options,<br>click on the button cancels the action',
+        wineWarning_description: 'Hide tooltip \'wine warning\'',
+        wineWarningTime_description: 'Wine remaining time turns, \'red\' at this point',
+        languageChange_description: '改變插件顯示語言',
+        newsticker_description: 'Hide news ticker in the GF-toolbar',
+        event_description: 'Hide events under the advisers',
+        logInPopup_description: '登入後自動隱藏資訊視窗',
+        birdswarm_description: '隱藏島嶼地圖及城鎮地圖上的鳥群動畫',
+        walkers_description: '隱藏島嶼地圖及城鎮地圖上的<br>市民動畫及運輸船動畫',
+        noPiracy_description: '隱藏城鎮地圖上的海賊堡壘',
+        hourlyRes_description: '隱藏上方資訊欄的資源每小時產量/用量',
+        onIkaLogs_description: 'use IkaLogs for your battle reports',
+        playerInfo_description: 'View information from the players in the island view',
+        control_description: 'Hide the Control center in world, island and city view',
+        // settings categories
+        visibility_category: '<b>插件能見度</b>',
+        display_category: '<b>顯示設定</b>',
+        global_category: '<b>Global Settings</b>',
+        army_category: '<b>軍事概覽設定</b>',
+        building_category: '<b>建築概覽設定</b>',
+        resource_category: '<b>資源概覽設定</b>',
+        language_category: '<b>語言設定</b>',
+        // Helptable
+        Initialize_Board: '<b>初始化列表</b>',
+        on_your_Town_Hall: '保持\"<b>市政廳</b>\"頁面打開，然後跳轉至每一個城鎮',
+        on_the_Troops: '保持\"<b>城鎮內軍隊</b>\"頁面打開，然後跳轉至每一個城鎮',
+        on_Museum: 'on Museum and then the \"Distribute Cultural Treaties\" tab',
+        on_Research_Advisor: '打開\"<b>研究顧問</b>\"頁面，點擊四個研究領域',
+        on_your_Palace: '打開\"<b>皇宮</b>\"頁面',
+        on_your_Finance: '打開\"<b>收支表</b>\"頁面',
+        on_the_Ambrosia: 'on the \"Ambrosia shop\"',
+        Re_Order_Towns: '<b>城鎮排序功能</b>',
+        Reset_Position: '<b>重置位置功能</b>',
+        On_any_tab: '在任何概覽頁面, 拖動城鎮名稱右面的資源圖示去改變你的城鎮排序',
+        Right_click: '右擊左面菜單的<b>Empire Overview</b>按鈕去重置插件顯示位置',
+        Navigate: '1, 2, 3 ... 0, -, = <b>:&nbsp;&nbsp;</b>快速導覽至城鎮1至12',
+        Navigate_to_City: 'SHIFT + 1/2/3/4/5/ <b>:&nbsp;&nbsp;</b>快速導覽至經濟概覽/建築概覽/軍事概覽/選項/說明頁面',
+        Navigate_to: 'Q, W, E, R <b>:&nbsp;&nbsp;</b>快速導覽至城鎮顧問/軍事顧問/研究顧問/外交顧問',
+        Navigate_to_World: 'SHIFT + Q, W, E <b>:&nbsp;&nbsp;</b>快速導覽至世界地圖/島嶼地圖/城鎮',
+        Spacebar: '空格鍵<b>:&nbsp;&nbsp;</b>快速隱藏/顯示插件',
+        Hotkeys: '<b>熱鍵</b>',
+        // formatting
+        thousandSeperator: ',',
+        decimalPoint: '.',
+        click_: '<b>點我</b>'
+      },
     },
 
     Resources: {
