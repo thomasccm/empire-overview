@@ -2593,8 +2593,8 @@
       }
       var elems = '<div id="SettingsTab"><div>';
       var inits = '<div class="options" style="clear:right"><span class="categories">' + Constant.LanguageData[lang].building_category + '</span>'
-        + ' <span><input type="checkbox" id="empire_alternativeBuildingList" ' + (database.settings.alternativeBuildingList.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].alternativeBuildingList_description + '"> ' + Constant.LanguageData[lang].alternativeBuildingList + '</nobr></span>'
-        + ' <span><input type="checkbox" id="empire_compressedBuildingList" ' + (database.settings.compressedBuildingList.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].compressedBuildingList_description + '"> ' + Constant.LanguageData[lang].compressedBuildingList + '</nobr></span>'
+        + ' <span><input type="checkbox" id="empire_alternativeBuildingList" disabled ' + (database.settings.alternativeBuildingList.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].alternativeBuildingList_description + '"> ' + Constant.LanguageData[lang].alternativeBuildingList + '</nobr></span>'
+        + ' <span><input type="checkbox" id="empire_compressedBuildingList" disabled ' + (database.settings.compressedBuildingList.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].compressedBuildingList_description + '"> ' + Constant.LanguageData[lang].compressedBuildingList + '</nobr></span>'
         + ' <hr>'
         + ' <span class="categories">' + Constant.LanguageData[lang].resource_category + '</span>'
         + ' <span><input type="checkbox" id="empire_hourlyRess" ' + (database.settings.hourlyRess.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].hourlyRes_description + '"> ' + Constant.LanguageData[lang].hourlyRes + '</nobr></span>'
@@ -2632,10 +2632,10 @@
         + ' <span class="categories">' + Constant.LanguageData[lang].army_category + '</span>'
         + ' <span><input type="checkbox" id="empire_fullArmyTable" ' + (database.settings.fullArmyTable.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].fullArmyTable_description + '"> ' + Constant.LanguageData[lang].fullArmyTable + '</nobr></span>'
         // + ' <span><input type="checkbox" id="empire_playerInfo" ' + (database.settings.playerInfo.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="'+ Constant.LanguageData[lang].playerInfo_description +'"> '+ Constant.LanguageData[lang].playerInfo +'</nobr></span>'
-        + ' <span><input type="checkbox" id="empire_onIkaLogs" ' + (database.settings.onIkaLogs.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].onIkaLogs_description + '"> ' + Constant.LanguageData[lang].onIkaLogs + '</nobr></span>'
+        + ' <span><input type="checkbox" id="empire_onIkaLogs" disabled ' + (database.settings.onIkaLogs.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].onIkaLogs_description + '"> ' + Constant.LanguageData[lang].onIkaLogs + '</nobr></span>'
         + ' <hr>'
         + ' <span class="categories">' + Constant.LanguageData[lang].global_category + '</span>'
-        + ' <span><input type="checkbox" id="empire_autoUpdates" ' + (database.settings.autoUpdates.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].autoUpdates_description + '"> ' + Constant.LanguageData[lang].autoUpdates + '</nobr></span>'
+        + ' <span><input type="checkbox" id="empire_autoUpdates" disabled ' + (database.settings.autoUpdates.value ? 'checked="checked"' : '') + '/><nobr data-tooltip="' + Constant.LanguageData[lang].autoUpdates_description + '"> ' + Constant.LanguageData[lang].autoUpdates + '</nobr></span>'
         + '</div>';
       var display = '<div class="options">'
         + ' <span class="categories">' + Constant.LanguageData[lang].display_category + '</span>'
